@@ -1,0 +1,73 @@
+.carousel-container {
+  width: 100%;
+  height: 600px; /* Asegúrate de que tenga altura */
+  overflow: hidden; /* ¡VITAL! Oculta las imágenes que están afuera */
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  /* Una transición más rápida hace que el "regreso" se note menos, 
+     o una muy lenta hace que se vea como un flujo constante */
+  transition: transform 1.0s cubic-bezier(0.45, 0, 0.55, 1); 
+}
+
+.slide {
+  min-width: 100%; /* Cada imagen ocupa el 100% del contenedor */
+  height: 100%;
+  position: relative;
+}
+
+.slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.slide-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 10%; /* Posiciona el texto a la izquierda como en tu foto */
+  background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
+}
+
+.text-content {
+  color: white;
+  max-width: 500px;
+}
+
+.slide-date {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.slide-title {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 25px;
+}
+
+.slide-btn {
+  background-color: #28a745; /* Verde como en tu referencia */
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.slide-btn:hover {
+  background-color: #218838;
+}

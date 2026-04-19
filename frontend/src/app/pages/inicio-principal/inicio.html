@@ -1,0 +1,18 @@
+<section class="carousel-container">
+  <div class="carousel-track" 
+       [class.no-transition]="!isTransitioning"
+       [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
+    
+    @for (slide of displaySlides; track $index) {
+      <div class="slide">
+        <img [src]="slide.img" class="slide-img">
+        <div class="slide-overlay">
+          <div class="text-content">
+            <h2 class="slide-title">{{ slide.titulo }}</h2>
+            <button class="slide-btn">Más información</button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

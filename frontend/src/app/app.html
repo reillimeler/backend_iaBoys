@@ -1,0 +1,24 @@
+<header class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand" routerLink="/">
+        <img src="logo2.png" alt="Centro de Hemodiálisis" class="nav-logo">
+    </div>
+
+    <nav class="nav-menu">
+      <a routerLink="/" 
+         routerLinkActive="active" 
+         [routerLinkActiveOptions]="{exact: true}" 
+         class="nav-link">Inicio</a>
+         
+      <a routerLink="/login" class="nav-btn-primary">Iniciar Sesión</a>
+      
+      <div class="user-profile">
+        <div class="avatar-empty"></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="content-area">
+  <router-outlet></router-outlet>
+</main>

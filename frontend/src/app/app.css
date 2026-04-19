@@ -1,0 +1,102 @@
+/* Paleta de colores: 
+   Azul Grisáceo: #546e7a
+   Gris Fondo: #f4f7f6
+   Gris Texto: #37474f
+*/
+
+:host {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color: #37474f;
+}
+
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #cfd8dc;
+  padding: 0.5rem 2rem; /* Reducimos el padding vertical para que no sea un bloque gigante */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1400px; /* Aumentamos un poco el ancho máximo para logos anchos */
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.nav-logo {
+  height: 50px; /* Bajamos de 500px a 100px para que sea elegante pero legible */
+  width: auto;
+  display: block;
+  transition: transform 0.3s ease; /* Un pequeño efecto por si quieres que crezca al pasar el mouse */
+}
+
+.nav-logo:hover {
+  transform: scale(1.05); /* Se agranda un poquito al poner el cursor */
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #607d8b;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #263238;
+}
+
+
+
+
+.nav-btn-primary {
+  text-decoration: none;
+  background-color: #eceff1; /* Gris muy claro azulado */
+  color: #455a64;
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: 1px solid #b0bec5;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.nav-btn-primary:hover {
+  background-color: #546e7a;
+  color: white;
+  border-color: #546e7a;
+}
+
+.avatar-empty {
+  width: 38px;
+  height: 38px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  border: 2px solid #cfd8dc;
+}
+
+.content-area {
+  background-color: #f4f7f6; /* Fondo gris frío muy suave */
+  min-height: calc(100vh - 70px);
+  padding: 20px;
+}
