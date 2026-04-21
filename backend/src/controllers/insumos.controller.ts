@@ -45,3 +45,41 @@ export const createInsumo = async (req: Request, res: Response) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
+// Obtener todos los insumos para el Dashboard
+export const getInsumos = async (req: Request, res: Response) => {
+  try {
+    const insumos = await prisma.insumos.findMany({
+      orderBy: { creado_en: 'desc' } // Los más nuevos primero
+    });
+    res.status(200).json({ success: true, data: insumos });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const getInsumosDashboard = async (req: Request, res: Response) => {
+  try {
+    const insumos = await prisma.insumos.findMany({
+      orderBy: { creado_en: 'desc' } // Los más nuevos primero
+    });
+
+    // Mapeamos los datos para añadir las alertas calculadas
+    const dataConAlertas = insumos.map(insumo => {
+      return {
+        ...insumo,
+        // HU07: Lógica de Bajo Stock [cite: 150, 199]
+        alertaStock: insumo.cantidad_actual <= insumo.stock_minimo,
+        
+        // HU05: Lógica de Vencimiento (ejemplo: falta menos de 30 días) [cite: 146, 199]
+        alertaVencimiento: insumo.fecha_vencimiento 
+        ? (new Date(insumo.fecha_vencimiento).getTime() - new Date().getTime()) / (1000 * 3600 * 24) < 30 
+        : false
+      };
+    });
+
+    res.status(200).json({ success: true, data: dataConAlertas });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
