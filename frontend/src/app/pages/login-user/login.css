@@ -1,15 +1,33 @@
 .login-container {
+  position: relative;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(70, 130, 180, 0.5), rgba(70, 130, 180, 0.5)), url('/medi4.jpg'); /* Color azulado medio mezclado con la imagen */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.7; 
+  filter: blur(2px); 
+  z-index: 0; /* Detrás del contenido */
 }
 
 .login-card {
-  background: white;
+  position: relative; /* Asegura que esté encima */
+  background: rgba(255, 255, 255, 0.95); /* Fondo semi-transparente para el card */
   padding: 2.5rem;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   width: 100%;
   max-width: 400px;
   border: 1px solid #e0e6ed;

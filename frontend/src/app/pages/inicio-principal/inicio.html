@@ -1,18 +1,44 @@
 <section class="carousel-container">
-  <div class="carousel-track" 
-       [class.no-transition]="!isTransitioning"
-       [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
-    
+
+  <!-- Contenedor que se mueve -->
+  <div 
+    class="carousel-track"
+    [class.no-transition]="!isTransitioning"
+    [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
+
+    <!-- Recorre todas las imágenes -->
     @for (slide of displaySlides; track $index) {
+
       <div class="slide">
-        <img [src]="slide.img" class="slide-img">
+
+        <!-- Imagen -->
+        <img 
+          [src]="slide.img" 
+          class="slide-img">
+
+        <!-- Capa oscura encima -->
         <div class="slide-overlay">
+
           <div class="text-content">
-            <h2 class="slide-title">{{ slide.titulo }}</h2>
-            <button class="slide-btn">Más información</button>
+
+            <!-- Título -->
+            <h2 class="slide-title">
+              {{ slide.titulo }}
+            </h2>
+
+            <!-- Botón -->
+            <button class="slide-btn">
+              Más información
+            </button>
+
           </div>
+
         </div>
+
       </div>
+
     }
+
   </div>
+
 </section>
