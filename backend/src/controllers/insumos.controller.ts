@@ -173,3 +173,29 @@ export const getInsumos = async (req: Request, res: Response) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
+
+
+export const getInsumosDashboard = async (req: Request, res: Response) => {
+  try {
+    const insumos = await prisma.insumos.findMany();
+
+    // Mapeamos los datos para añadir las alertas calculadas
+    const dataConAlertas = insumos.map(insumo => {
+      return {
+        ...insumo,
+        [span_2](start_span)[span_3](start_span)// HU07: Lógica de Bajo Stock[span_2](end_span)[span_3](end_span)
+        alertaStock: insumo.cantidad_actual <= insumo.stock_minimo,
+        
+        [span_4](start_span)[span_5](start_span)// HU05: Lógica de Vencimiento (ejemplo: falta menos de 30 días)[span_4](end_span)[span_5](end_span)
+        alertaVencimiento: insumo.fecha_vencimiento 
+          ? (new Date(insumo.fecha_vencimiento).getTime() - new Date().getTime()) / (1000 * 3600 * 24) < 30 
+          : false
+      };
+    });
+
+    res.status(200).json({ success: true, data: dataConAlertas });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
