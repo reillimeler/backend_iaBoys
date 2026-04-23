@@ -4,8 +4,9 @@ import { Observable } from 'rxjs'; // <--- ¡Mantenlo!
 
 @Injectable({ providedIn: 'root' })
 export class UsuarioService {
-  private API_URL_REGISTER = 'http://localhost:3000/api/auth/register';
-  private API_URL_LOGIN = 'http://localhost:3000/api/auth/login'; // <--- Nueva URL
+  //puerta de el lase con el backend
+  private API_URL_REGISTER = 'http://localhost:3000/api/usuarios/register';
+  private API_URL_LOGIN = 'http://localhost:3000/api/usuarios/login'; // <--- Nueva URL
 
   constructor(private http: HttpClient) {}
 
