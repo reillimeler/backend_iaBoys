@@ -8,6 +8,7 @@
     <nav class="admin-nav">
       <a routerLink="registrar-usuario" 
          routerLinkActive="active-tab" 
+         [routerLinkActiveOptions]="{ exact: true }"
          class="nav-tab">
         <span class="tab-icon">👤</span>
         Registrar Usuario
@@ -17,9 +18,12 @@
         <span class="tab-icon">📋</span>
         Gestión de Pacientes
       </a>
-      <a class="nav-tab disabled">
+      <a routerLink="registrar-cat" 
+         routerLinkActive="active-tab"
+         [routerLinkActiveOptions]="{ exact: true }" 
+         class="nav-tab">
         <span class="tab-icon">📦</span>
-        Inventario
+        Registro de Insumos
       </a>
     </nav>
 
