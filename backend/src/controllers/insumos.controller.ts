@@ -158,3 +158,18 @@ export const getBajoStock = async (req: Request, res: Response) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
+
+
+
+// Obtener todos los insumos para el Dashboard
+export const getInsumos = async (req: Request, res: Response) => {
+  try {
+    const insumos = await prisma.insumos.findMany({
+      orderBy: { creado_en: 'desc' } // Los más nuevos primero
+    });
+    res.status(200).json({ success: true, data: insumos });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
