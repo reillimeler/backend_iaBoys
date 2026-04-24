@@ -1,0 +1,109 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #f4f7f6;
+  padding: 20px;
+}
+
+.register-container::before {
+  content: '';
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(2px);
+  z-index: 0;
+}
+
+.register-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #e0e6ed;
+  z-index: 1;
+}
+
+.register-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.register-header h2 {
+  color: #37474f;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.register-header p {
+  color: #78909c;
+  font-size: 0.9rem;
+}
+
+.register-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.register-form .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #546e7a;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.register-form .form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.register-form .form-group input:focus {
+  outline: none;
+  border-color: #546e7a;
+}
+
+.btn-register {
+  width: 100%;
+  padding: 12px;
+  background-color: #546e7a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-register:hover {
+  background-color: #37474f;
+}
+
+.error-text {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.success-text {
+  color: #388e3c;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
