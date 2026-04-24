@@ -11,8 +11,7 @@ export const routes: Routes = [
   
   // Dashboard de Administrador
   { 
-    path: 'admin', 
-    component: AdminDashboard,
+    path: 'admin', component: AdminDashboard,
     children: [
       { path: 'registrar-usuario', component: CreateUser },
       { path: 'registrar-cat', component: RegistrarCat },

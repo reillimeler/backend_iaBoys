@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class InsumoService {
-  private API_URL_CREATE = 'http://localhost:3000/api/insumos'; // POST
+  private API_URL_CREATE = 'http://localhost:3000/api/insumos/createInsumo'; // POST
 
   constructor(private http: HttpClient) {}
 

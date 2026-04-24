@@ -21,7 +21,7 @@ export const registerUser = async (req: Request, res: Response) => {
       ci: String(ci),
       nombre_completo,
       password,
-      id_rol
+      id_rol:Number(id_rol),
     });
 
     res.status(201).json({ success: true, user: newUser });
