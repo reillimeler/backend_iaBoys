@@ -18,4 +18,19 @@ export class UsuarioService {
   login(credenciales: any): Observable<any> {
     return this.http.post(this.API_URL_LOGIN, credenciales);
   }
+
+  getUsuarios(): Observable<any> {
+    return this.http.get('http://localhost:3000/api/usuarios/getUsuario');
+  }
+///:id
+  actualizarUsuario(id: number | null, datos: any): Observable<any> {
+    return this.http.put(`http://localhost:3000/api/usuarios/${id}`, datos);
+  }
+
+  eliminarUsuario(id: number): Observable<any> {
+    return this.http.delete(`http://localhost:3000/api/usuarios/${id}`);
+  }
+
+
+
 }

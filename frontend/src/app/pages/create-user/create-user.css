@@ -4,24 +4,6 @@ select option {
   color: #3f374f; /* El color oscuro que usas para el texto */
 }
 
-.register-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-  background-color: #f4f7f6;
-  padding: 20px;
-}
-
-.card {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 500px;
-}
-
 .card-header h2 {
   color: #2c3e50;
   margin-bottom: 0.5rem;
@@ -40,26 +22,151 @@ label {
 }
 
 input, select {
-  width: 100%;
-  padding: 12px;
+  width: 95%;
+  padding: 10px;
   border: 1px solid #dce4ec;
   border-radius: 6px;
   font-size: 1rem;
 }
 
-.btn-primary {
-  width: 100%;
-  padding: 12px;
-  background-color: #3498db;
+input,select:focus {
+  outline: none;
+  border-color: #546e7a;
+}
+
+.btn-register {
+  width: 40%;
+  padding: 10px;
+  background-color: #546e7a;
   color: white;
   border: none;
-  border-radius: 6px;
-  font-weight: bold;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.3s;
 }
 
-.btn-primary:disabled {
-  background-color: #bdc3c7;
-  cursor: not-allowed;
+.btn-register:hover {
+  background: #334155;
 }
+
+.error-text {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.success-text {
+  color: #388e3c;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.navbar-actions {
+  display: flex;              /* Activa flexbox */
+  justify-content: space-between; /* Distribuye los elementos a los extremos */
+  align-items: center;        /* Centra verticalmente */
+  gap: 1rem;                  /* Espacio entre elementos */
+  padding: 0.5rem 2rem;       /* Opcional: margen interno */
+  background-color: #f5f5f5;  /* Opcional: color de fondo */
+  border-radius: 6px; 
+  margin: 15px;        /* Opcional: esquinas redondeadas */
+}
+
+/*boton de busqueda*/
+.navbar-actions .btn-open {
+  background-color: #007bff;  /* Color del botón */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* input de Busqqueda*/
+
+.navbar-actions .input-search {
+  flex: 1;                    /* El input ocupa el espacio disponible */
+  max-width: 300px;           /* Limita el ancho */
+  padding: 0.5rem;
+
+  border: 1.5px solid #cfd8dc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+.navbar-actions .input-search:focus {
+  outline: none;
+  border-color: #546e7a;
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background: #f5f5f5;
+  
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+  z-index: 9999; /* 🔥 CLAVE */
+
+}
+
+/* Ventana */
+.modal-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2.5rem;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25); /* 🔥 más profundidad */
+  width: 100%;
+  max-width: 400px;
+  animation: aparecer 0.2s ease;
+  border: 1px solid #e6e6e6;
+   border-radius: 10px ;
+  z-index: 1;
+}
+
+@keyframes aparecer {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+/* Botones */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/*Funciones de nuebos implementos*/
+

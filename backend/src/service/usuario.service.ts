@@ -43,4 +43,48 @@ export class UsuarioService {
       include: { roles: true }
     });
   }
+
+
+  // Buscar por ID
+  async buscarPorId(id: number) {
+    return prisma.usuarios.findUnique({
+      where: { id_usuario: id }
+    });
+  }
+
+  async obtenerUsuarios() {
+  return prisma.usuarios.findMany({
+    include: { roles: true },
+    orderBy: { id_usuario: 'desc' }
+  });
+}
+
+// Actualizar usuario
+  async actualizarUsuario(id: number, data: any) {
+
+    let updateData: any = {
+      ci: data.ci,
+      nombre_completo: data.nombre_completo,
+      id_rol: data.id_rol
+    };
+
+    // Si viene password, la encriptamos
+    if (data.password) {
+      const salt = await bcrypt.genSalt(10);
+      updateData.password_hash = await bcrypt.hash(data.password, salt);
+    }
+
+    return prisma.usuarios.update({
+      where: { id_usuario: id },
+      data: updateData
+    });
+  }
+
+// Eliminar usuario
+  async eliminarUsuario(id: number) {
+    return prisma.usuarios.delete({
+      where: { id_usuario: id }
+    });
+  }
+  
 }

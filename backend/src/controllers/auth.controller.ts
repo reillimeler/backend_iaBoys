@@ -74,4 +74,91 @@ export const loginUser = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
   }
+
+
+
 };
+
+
+export const getUsuarios = async (req: Request, res: Response) => {
+  try {
+
+    const usuarios = await usuarioService.obtenerUsuarios();
+
+    res.status(200).json({
+      success: true,
+      data: usuarios
+    });
+
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+};
+
+export const updateUsuario = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { ci, nombre_completo, password, id_rol } = req.body;
+
+   /* if (!ci || !nombre_completo) {
+      return res.status(400).json({
+        success: false,
+        message: "CI y nombre son obligatorios"
+      });
+    }*/
+
+    const usuarioExistente = await usuarioService.buscarPorId(Number(id));
+
+    if (!usuarioExistente) {
+      return res.status(404).json({
+        success: false,
+        message: "Usuario no encontrado"
+      });
+    }
+
+    const actualizado = await usuarioService.actualizarUsuario(Number(id), {
+      ci,
+      nombre_completo,
+      password,
+      id_rol
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Usuario actualizado",
+      data: actualizado
+    });
+
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const deleteUsuario = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const usuarioExistente = await usuarioService.buscarPorId(Number(id));
+
+    if (!usuarioExistente) {
+      return res.status(404).json({
+        success: false,
+        message: "Usuario no encontrado"
+      });
+    }
+
+    await usuarioService.eliminarUsuario(Number(id));
+
+    res.status(200).json({
+      success: true,
+      message: "Usuario eliminado correctamente"
+    });
+
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+

@@ -1,57 +1,119 @@
-<div class="register-container">
-  <div class="register-card">
-    <div class="register-header">
-      <h2>Registro de Insumo</h2>
-      <p>Ingrese los detalles del nuevo insumo</p>
+<div class="navbar-actions">
+  <!-- 🔹 BOTÓN -->
+  <button class="btn-open" (click)="abrirModal()">
+    + Registrar Insumo
+  </button>
+
+  <!-- 🔹 BUSCADOR -->
+  <input 
+    type="text"
+    placeholder="Buscar insumo..."
+    [ngModel]="busqueda()"
+    (ngModelChange)="busqueda.set($event)"
+    class="input-search"
+  />
+</div>
+
+<!-- 🔹 TABLA -->
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Código</th>
+      <th>Nombre</th>
+      <th>Stock</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+ <tbody>
+  @for (insumo of insumosFiltrados(); track insumo.id_insumo; let i = $index) {
+    <tr [class.stock-bajo]="insumo.stock_minimo < 10">
+
+      <td>{{ i + 1 }}</td>
+      <td>{{ insumo.codigo_interno }}</td>
+      <td>{{ insumo.nombre }}</td>
+      <td>{{ insumo.stock_minimo }}</td>
+
+      <!-- 🔥 AQUÍ VA -->
+      <td>
+        <button (click)="editarInsumo(insumo)">✏️</button>
+        <button (click)="eliminarInsumo(insumo.id_insumo)">🗑️</button>
+      </td>
+
+    </tr>
+  }
+</tbody>
+</table>
+
+<!-- 🔹 MODAL -->
+@if (mostrarModal()) {
+  <div class="modal-backdrop">
+
+    <!-- tarjeta flotante -->
+
+    <div class="modal-card">
+
+      <h2>Registrar Insumo</h2>
+
+      
+      <form (submit)="$event.preventDefault(); onRegister()" class="register-form">
+        <div class="form-group">
+          <label for="codigo_interno">Código Interno</label>
+          <input 
+            type="text" 
+            id="codigo_interno" 
+            [ngModel]="codigoInterno()" 
+            (ngModelChange)="codigoInterno.set($event)" 
+            name="codigo_interno" 
+            placeholder="Ej: AG-15"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input 
+            type="text" 
+            id="nombre" 
+            [ngModel]="nombre()" 
+            (ngModelChange)="nombre.set($event)" 
+            name="nombre" 
+            placeholder="Ej: Aguja #15"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="stock_minimo">Stock Mínimo</label>
+          <input 
+            type="number" 
+            id="stock_minimo" 
+            [ngModel]="stockMinimo()" 
+            (ngModelChange)="stockMinimo.set($event)" 
+            name="stock_minimo" 
+            placeholder="Ej: 50"
+            min="0"
+            required>
+        </div>
+
+        @if (errorMessage()) {
+          <p class="error-text">{{ errorMessage() }}</p>
+        }
+
+        @if (successMessage()) {
+          <p class="success-text">{{ successMessage() }}</p>
+        }
+        
+
+          <div class="modal-actions">
+            <button class="btn-register" type="submit">
+              {{ modoEdicion() ? 'Actualizar' : 'Guardar' }}
+            </button>
+            <button class="btn-register" type="button" (click)="cerrarModal()">Cancelar</button>
+          </div>
+      </form>
+
+
     </div>
 
-    <form (submit)="$event.preventDefault(); onRegister()" class="register-form">
-      <div class="form-group">
-        <label for="codigo_interno">Código Interno</label>
-        <input 
-          type="text" 
-          id="codigo_interno" 
-          [ngModel]="codigoInterno()" 
-          (ngModelChange)="codigoInterno.set($event)" 
-          name="codigo_interno" 
-          placeholder="Ej: AG-15"
-          required>
-      </div>
-
-      <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input 
-          type="text" 
-          id="nombre" 
-          [ngModel]="nombre()" 
-          (ngModelChange)="nombre.set($event)" 
-          name="nombre" 
-          placeholder="Ej: Aguja #15"
-          required>
-      </div>
-
-      <div class="form-group">
-        <label for="stock_minimo">Stock Mínimo</label>
-        <input 
-          type="number" 
-          id="stock_minimo" 
-          [ngModel]="stockMinimo()" 
-          (ngModelChange)="stockMinimo.set($event)" 
-          name="stock_minimo" 
-          placeholder="Ej: 50"
-          min="0"
-          required>
-      </div>
-
-      @if (errorMessage()) {
-        <p class="error-text">{{ errorMessage() }}</p>
-      }
-
-      @if (successMessage()) {
-        <p class="success-text">{{ successMessage() }}</p>
-      }
-
-      <button type="submit" class="btn-register">Registrar Insumo</button>
-    </form>
   </div>
-</div>
+}

@@ -39,4 +39,5 @@ model usuarios {
   es_activo       Boolean? @default(true)
   id_rol          Int
   roles           roles    @relation(fields: [id_rol], references: [id_rol], onDelete: NoAction, onUpdate: NoAction, map: "fk_rol")
+  //creado_en       DateTime @default(now()) // 👈 AGREGA ESTO y luego npx prisma migrate dev
 }

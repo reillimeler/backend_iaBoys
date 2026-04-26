@@ -173,4 +173,81 @@ export const getInsumos = async (req: Request, res: Response) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+export const updateInsumo = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { codigo_interno, nombre, stock_minimo } = req.body;
+
+    // Validación básica
+    if (!codigo_interno || !nombre) {
+      return res.status(400).json({
+        success: false,
+        message: "Código y nombre son obligatorios"
+      });
+    }
+
+    // Verificar si existe
+    const insumoExistente = await prisma.insumos.findUnique({
+      where: { id_insumo: Number(id) }
+    });
+
+    if (!insumoExistente) {
+      return res.status(404).json({
+        success: false,
+        message: "Insumo no encontrado"
+      });
+    }
+
+    // Actualizar
+    const actualizado = await prisma.insumos.update({
+      where: { id_insumo: Number(id) },
+      data: {
+        codigo_interno,
+        nombre,
+        stock_minimo: Number(stock_minimo)
+      }
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Insumo actualizado",
+      data: actualizado
+    });
+
+  } catch (error: any) {
+    console.error("Error al actualizar:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const deleteInsumo = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    // Verificar si existe
+    const insumoExistente = await prisma.insumos.findUnique({
+      where: { id_insumo: Number(id) }
+    });
+
+    if (!insumoExistente) {
+      return res.status(404).json({
+        success: false,
+        message: "Insumo no encontrado"
+      });
+    }
+
+    await prisma.insumos.delete({
+      where: { id_insumo: Number(id) }
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Insumo eliminado correctamente"
+    });
+
+  } catch (error: any) {
+    console.error("Error al eliminar:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
 

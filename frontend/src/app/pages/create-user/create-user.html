@@ -1,49 +1,120 @@
-<div class="register-container">
-  <div class="card">
-    <div class="card-header">
-      <h2>Registro de Usuarios - Almacén Hemodiálisis</h2>
-      <p>Asigne los datos básicos y el nivel de acceso al sistema.</p>
+<div class="navbar-actions">
+  <!-- 🔹 BOTÓN -->
+  <button class="btn-open" (click)="abrirModal()">
+    + Registrar usuario
+  </button>
+
+  <!-- 🔹 BUSCADOR -->
+  <input 
+    type="text"
+    placeholder="Buscar insumo..."
+    [ngModel]="busqueda()"
+    (ngModelChange)="busqueda.set($event)"
+    class="input-search"
+  />
+</div>
+<!-- 🔹 TABLA -->
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>CI</th>
+      <th>Rol</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (usuario of usuariosFiltrados(); track usuario.id_usuario; let i = $index) {
+      <tr >
+        <td>{{ i + 1 }}</td>
+
+        <td>{{ usuario.nombre_completo }}</td>
+        <td>{{ usuario.ci }}</td>
+        <td>{{ getRolNombre(usuario.id_rol) }}</td>
+
+        <!-- 🔥 AQUÍ VA -->
+        <td>
+          <button (click)="editarUsuario(usuario)">✏️</button>
+          <button (click)="eliminarUsuario(usuario.id_usuario)">🗑️</button>
+        </td>
+
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+
+
+<!-- 🔹 MODAL -->
+@if (mostrarModal()) {
+  <div class="modal-backdrop">
+
+    <!-- tarjeta flotante -->
+
+    <div class="modal-card">
+
+      <div class="card-header">
+        <h2>Registro de Usuarios </h2>
+        <p>Asigne los datos básicos y el nivel de acceso al sistema.</p>
+      </div>
+      
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        
+        <div class="form-group">
+          <label>Nombre Completo</label>
+          <input type="text" formControlName="nombre_completo" placeholder="Ej. Ana Martínez">
+          @if (userForm.get('nombre_completo')?.invalid && userForm.get('nombre_completo')?.touched) {
+            <small class="error-msg">El nombre es obligatorio (mín. 3 caracteres)</small>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>Cédula de Identidad (CI)</label>
+          <input type="text" formControlName="ci" placeholder="Ej. 1234567">
+          @if (userForm.get('ci')?.invalid && userForm.get('ci')?.touched) {
+            <small class="error-msg">Ingrese un CI válido (solo números)</small>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>Rol de Usuario</label>
+          <select formControlName="id_rol">
+            <option [value]="1">Administrador</option>
+            <option [value]="2">Almacén</option>
+            <option [value]="3">Enfermería</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" formControlName="password" placeholder="••••••••">
+          @if (userForm.get('password')?.invalid && userForm.get('password')?.touched) {
+            <small class="error-msg">La contraseña debe tener al menos 6 caracteres</small>
+          }
+        </div>
+        
+        @if (errorMessage()) {
+          <p class="error-text">{{ errorMessage() }}</p>
+        }
+
+        @if (successMessage()) {
+          <p class="success-text">{{ successMessage() }}</p>
+        }
+
+         <div class="modal-actions">
+            <button class="btn-register" type="submit">
+              {{ modoEdicion() ? 'Actualizar' : 'Guardar' }}
+            </button>
+            <button class="btn-register" type="button" (click)="cerrarModal()">Cancelar</button>
+          </div>  
+
+      </form>
+
+
     </div>
 
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-      
-      <div class="form-group">
-        <label>Nombre Completo</label>
-        <input type="text" formControlName="nombre_completo" placeholder="Ej. Ana Martínez">
-        @if (userForm.get('nombre_completo')?.invalid && userForm.get('nombre_completo')?.touched) {
-          <small class="error-msg">El nombre es obligatorio (mín. 3 caracteres)</small>
-        }
-      </div>
-
-      <div class="form-group">
-        <label>Cédula de Identidad (CI)</label>
-        <input type="text" formControlName="ci" placeholder="Ej. 1234567">
-        @if (userForm.get('ci')?.invalid && userForm.get('ci')?.touched) {
-          <small class="error-msg">Ingrese un CI válido (solo números)</small>
-        }
-      </div>
-
-      <div class="form-group">
-        <label>Rol de Usuario</label>
-        <select formControlName="id_rol">
-          <option [value]="1">Administrador</option>
-          <option [value]="2">Almacén</option>
-          <option [value]="3">Enfermería</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Contraseña</label>
-        <input type="password" formControlName="password" placeholder="••••••••">
-        @if (userForm.get('password')?.invalid && userForm.get('password')?.touched) {
-          <small class="error-msg">La contraseña debe tener al menos 6 caracteres</small>
-        }
-      </div>
-
-      <button type="submit" [disabled]="userForm.invalid" class="btn-primary">
-        Registrar Usuario
-      </button>
-
-    </form>
   </div>
-</div>
+}
