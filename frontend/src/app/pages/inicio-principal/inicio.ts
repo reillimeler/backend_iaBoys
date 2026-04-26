@@ -1,53 +1,78 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [], 
+  imports: [CommonModule],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css'
 })
 export class Inicio implements OnInit, OnDestroy {
-  currentIndex = 0;
-  private intervalId: any;
-  isTransitioning = true; // Controla si la animación está activa
 
-  // Tus imágenes originales
+  currentIndex = 0;
+
+  private intervalId: any;
+
+  isTransitioning = true;
+
+  // 👇 IMPORTANTE
+  constructor(private cdr: ChangeDetectorRef) {}
+
   slides = [
-    { img: 'fondo1.jpg', titulo: 'Atención Especializada' },
-    { img: 'fondo2.jpg', titulo: 'Tecnología de Punta' },
-  
+    { img: 'medi1.jpg', titulo: 'Atención Especializada' },
+    { img: 'medi2.jpg', titulo: 'Tecnología de Punta' },
+    { img: 'medi3.png', titulo: 'Confianza y Seguridad' }
   ];
 
-  // Creamos una lista que incluye un clon de la primera imagen al final
-  // Esto hace que después de la 3, aparezca la 1 otra vez antes de saltar
   displaySlides = [...this.slides, this.slides[0]];
 
   ngOnInit() {
+
     this.startAutoPlay();
+
   }
 
   startAutoPlay() {
+
     this.intervalId = setInterval(() => {
+
       this.nextSlide();
-    }, 5000);
+
+    }, 3500);
+
   }
 
   nextSlide() {
+
+    console.log("Cambiando slide");
+
     this.isTransitioning = true;
+
     this.currentIndex++;
 
-    // Si llegamos al clon (el final de displaySlides)
+    // 🔥 FORZAR ACTUALIZACIÓN
+    this.cdr.detectChanges();
+
     if (this.currentIndex === this.displaySlides.length) {
-      // Esperamos a que termine la animación (1s según el CSS)
-      setTimeout(() => {
-        this.isTransitioning = false; // Desactivamos la animación
-        this.currentIndex = 0;        // Saltamos al inicio real
-      }, 1000); 
+
+        this.isTransitioning = false;
+
+        this.currentIndex = 0;
+
+        // 🔥 FORZAR ACTUALIZACIÓN
+        this.cdr.detectChanges();
+
     }
+
+  }
+  ngOnDestroy() {
+
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+
+    }
+
   }
 
-  ngOnDestroy() {
-    if (this.intervalId) clearInterval(this.intervalId);
-  }
 }

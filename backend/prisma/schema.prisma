@@ -12,6 +12,17 @@ model insumos {
   nombre         String    @db.VarChar(100)
   stock_minimo   Int?      @default(0)
   creado_en      DateTime? @default(now()) @db.Timestamp(6)
+  lotes          lotes[]
+}
+
+model lotes {
+  id_lote             Int       @id @default(autoincrement())
+  id_insumo           Int
+  numero_lote         String    @db.VarChar(50)
+  cantidad_disponible Int
+  fecha_vencimiento   DateTime  @db.Date
+  fecha_ingreso       DateTime? @default(now()) @db.Timestamp(6)
+  insumo              insumos   @relation(fields: [id_insumo], references: [id_insumo], onDelete: NoAction, onUpdate: NoAction, map: "fk_insumo")
 }
 
 model roles {
@@ -28,4 +39,5 @@ model usuarios {
   es_activo       Boolean? @default(true)
   id_rol          Int
   roles           roles    @relation(fields: [id_rol], references: [id_rol], onDelete: NoAction, onUpdate: NoAction, map: "fk_rol")
+  //creado_en       DateTime @default(now()) // 👈 AGREGA ESTO y luego npx prisma migrate dev
 }

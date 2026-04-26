@@ -1,39 +1,63 @@
 <div class="admin-layout">
-  <aside class="admin-sidebar">
+
+  <aside class="admin-sidebar" [class.collapsed]="isCollapsed">
+
     <div class="sidebar-header">
-      <i class="icon-admin"></i>
-      <span>Panel Administrativo</span>
+      <button (click)="toggleSidebar()">☰</button>
+      <span *ngIf="!isCollapsed">Panel Administrativo</span>
     </div>
-    
+
     <nav class="admin-nav">
+
       <a routerLink="registrar-usuario" 
          routerLinkActive="active-tab" 
+         [routerLinkActiveOptions]="{ exact: true }"
          class="nav-tab">
+
         <span class="tab-icon">👤</span>
-        Registrar Usuario
+        <span *ngIf="!isCollapsed">Registrar Usuario</span>
+
       </a>
-      
+
       <a class="nav-tab disabled">
         <span class="tab-icon">📋</span>
-        Gestión de Pacientes
+        <span *ngIf="!isCollapsed">Gestión de Pacientes</span>
       </a>
-      <a class="nav-tab disabled">
+
+      <a routerLink="registrar-cat" 
+         routerLinkActive="active-tab"
+         [routerLinkActiveOptions]="{ exact: true }" 
+         class="nav-tab">
+
         <span class="tab-icon">📦</span>
-        Inventario
+        <span *ngIf="!isCollapsed">Registro de Insumos</span>
+
       </a>
+
     </nav>
 
     <div class="sidebar-footer">
       <a routerLink="/" class="btn-logout">Cerrar Sesión</a>
     </div>
+
   </aside>
 
   <main class="admin-content">
+
     <header class="content-header">
-      <h2>Gestión de Personal</h2>
+      <h2>{{ titulo }}</h2>
     </header>
+
     <section class="view-container">
       <router-outlet></router-outlet>
     </section>
+
   </main>
+    <!-- MODAL -->
+
+
+
+
+
+
 </div>

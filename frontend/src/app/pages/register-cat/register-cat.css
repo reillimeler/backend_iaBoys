@@ -1,50 +1,93 @@
-
-/* Estilo para las opciones reales */
-select option {
-  color: #3f374f; /* El color oscuro que usas para el texto */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #f4f7f6;
+  padding: 20px;
 }
 
-.card-header h2 {
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
+.register-container::before {
+  content: '';
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(2px);
+  z-index: 0;
+}
+
+.register-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #e0e6ed;
+  z-index: 1;
+}
+
+.register-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.register-header h2 {
+  color: #37474f;
+  margin: 0;
   font-size: 1.5rem;
 }
 
-.form-group {
+.register-header p {
+  color: #78909c;
+  font-size: 0.9rem;
+}
+
+.register-form .form-group {
   margin-bottom: 1.5rem;
 }
 
-label {
+.register-form .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #34495e;
+  color: #546e7a;
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
-input, select {
-  width: 95%;
-  padding: 10px;
-  border: 1px solid #dce4ec;
-  border-radius: 6px;
+.register-form .form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 8px;
   font-size: 1rem;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
 }
 
-input,select:focus {
+
+.register-form .form-group input:focus {
   outline: none;
   border-color: #546e7a;
 }
 
+
+
 .btn-register {
-  width: 40%;
-  padding: 10px;
-  background-color: #546e7a;
+  background: #475569;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: 10px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: 0.2s;
 }
 
 .btn-register:hover {
@@ -75,8 +118,7 @@ input,select:focus {
   border-radius: 6px; 
   margin: 15px;        /* Opcional: esquinas redondeadas */
 }
-
-/*boton de busqueda*/
+/* Botón */
 .navbar-actions .btn-open {
   background-color: #007bff;  /* Color del botón */
   color: white;
@@ -85,7 +127,19 @@ input,select:focus {
   border-radius: 4px;
   cursor: pointer;
 }
+/*boton de busqueda*/
 
+
+
+.btn-open {
+  
+  padding: 10px;
+  background: orange;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
 /* input de Busqqueda*/
 
 .navbar-actions .input-search {
@@ -131,24 +185,32 @@ th {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
-  padding: 20px;
   z-index: 9999; /* 🔥 CLAVE */
 
 }
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
+  background: rgba(0,0,0,0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999; /* 🔥 CLAVE */
+}
 /* Ventana */
 .modal-card {
-  position: relative;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2.5rem;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 360px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.25); /* 🔥 más profundidad */
-  width: 100%;
-  max-width: 400px;
   animation: aparecer 0.2s ease;
-  border: 1px solid #e6e6e6;
-   border-radius: 10px ;
-  z-index: 1;
 }
 
 @keyframes aparecer {
@@ -167,6 +229,17 @@ th {
   justify-content: space-between;
   margin-top: 10px;
 }
-
+.btn-primary {
+  background: #ff7a00;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+}
+.btn-secondary {
+  background: #e0e0e0;
+  color: #333;
+}
 /*Funciones de nuebos implementos*/
-
+.stock-bajo {
+  background-color: #fee2e2;
+}

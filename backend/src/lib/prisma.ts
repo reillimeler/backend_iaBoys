@@ -7,7 +7,7 @@ dotenv.config();
 
 const dbUrl = process.env.DATABASE_URL;
 
-// Clase Singleton
+// Clase Singleton/clases selladas simulacion 
 class PrismaSingleton {
   private static instance: PrismaClient;
 

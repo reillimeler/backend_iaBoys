@@ -16,9 +16,9 @@ app.use(cors({
 
 app.use(express.json());
 
-// Punto de entrada de la API
-app.use("/api/auth", authRoutes);
-app.use("/api", insumoRoutes);
+// Punto de entrada de la API con el frontend
+app.use("/api/usuarios", authRoutes);
+app.use("/api/insumos", insumoRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "🚀 Backend funcionando" });
